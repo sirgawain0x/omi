@@ -37,7 +37,7 @@
   "overrides": {
     "@hono/node-server": "~2.0.5",
     "hono": "~4.12.27",
-    "brace-expansion": "~5.0.8",
+    "brace-expansion": "~5.0.12",
     "@xmldom/xmldom": "^0.9.8",
     "tar": "~7.5.21",
     "postcss": "~8.5.18",
