@@ -592,9 +592,7 @@ class OmiDeviceConnection extends DeviceConnection {
           notifySub = sub;
         });
         if (!ok) return false;
-        // Firmware blocks ~4s inside the final write while I2S drains.
         if (generation != _pcmSpeakerGeneration) return false;
-        await Future<void>.delayed(const Duration(milliseconds: 4200));
       }
       return true;
     } catch (e) {

@@ -484,24 +484,30 @@ void main() {
     });
   });
 
-  test('omi device mode skips when the wearable speaker is unavailable', () async {
+  test('omi device mode falls back to phone when the wearable speaker is unavailable', () async {
     SharedPreferencesUtil().voiceResponseMode = 3;
     deviceReady = false;
     await install(synthesize: (_) async => _mp3);
 
     await service.beginResponse(messageId: 'no-device');
+    expect(probedDevice, isTrue);
+    expect(probed, isTrue);
+
+    service.updateStreamingResponse(messageId: 'no-device', fullText: _firstSentence, isFinal: true);
+    await pumpEventQueue();
+    await releaseDelays();
     await flush();
 
-    expect(probedDevice, isTrue);
-    expect(synthesizeFormats, isEmpty);
+    expect(synthesizeFormats, everyElement('mp3_44100_128'));
     expect(devicePlays, isEmpty);
+    expect(plays, hasLength(1));
     expectFields(playbackEvents().single, {
-      'outcome': 'skipped',
+      'outcome': 'played',
       'skip_reason': 'none',
       'mode': 'unknown',
       'output_route': 'bluetooth',
-      'chunks_requested': 0,
-      'chunks_played': 0,
+      'chunks_requested': 1,
+      'chunks_played': 1,
     });
   });
 }

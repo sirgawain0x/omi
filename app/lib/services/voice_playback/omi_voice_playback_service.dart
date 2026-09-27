@@ -255,27 +255,22 @@ class OmiVoicePlaybackService {
     await _ensureInitialized();
     await _cancelPreview();
 
+    var routeToOmiDevice = mode == 3;
     final VoicePlaybackOutputSnapshot output;
-    final routeToOmiDevice = mode == 3;
     if (routeToOmiDevice) {
       final deviceReady = await _probeOmiDeviceSpeaker();
-      if (!deviceReady) {
-        debugPrint('OmiVoicePlayback: no Omi speaker — skipping playback (mode=omi_device)');
-        // Closed analytics enum has no dedicated no-device reason; `none` +
-        // modeInt-equivalent unknown mode still records the skip.
-        _emitSkip(
-          mode: VoiceReplyPlaybackMode.unknown,
-          skipReason: VoiceReplyPlaybackSkipReason.none,
-          outputRoute: VoiceReplyPlaybackOutputRoute.bluetooth,
+      if (deviceReady) {
+        output = const VoicePlaybackOutputSnapshot(
+          headphonesConnected: false,
+          checkFailed: false,
+          // BLE wearable speaker — closest released output_route value.
+          route: VoiceReplyPlaybackOutputRoute.bluetooth,
         );
-        return;
+      } else {
+        debugPrint('OmiVoicePlayback: no Omi speaker — falling back to phone (mode=omi_device)');
+        routeToOmiDevice = false;
+        output = await _probeOutput();
       }
-      output = const VoicePlaybackOutputSnapshot(
-        headphonesConnected: false,
-        checkFailed: false,
-        // BLE wearable speaker — closest released output_route value.
-        route: VoiceReplyPlaybackOutputRoute.bluetooth,
-      );
     } else {
       output = await _probeOutput();
       // Mode 1 (headphones only): skip if no private-listening output is
@@ -568,6 +563,7 @@ class OmiVoicePlaybackService {
     final token = _lifecycleToken;
     final startedAt = _now();
     try {
+      await _activateSession();
       if (debugHooks != null) {
         final speak = debugHooks!.speak;
         if (speak == null) {
