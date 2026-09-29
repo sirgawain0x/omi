@@ -139,6 +139,30 @@ final class AuthorizedToolExecutionTests: XCTestCase {
     XCTAssertEqual(command.executor, .realtimeHub)
   }
 
+  func testWebSearchRoutesToChatToolExecutorOnMainChat() throws {
+    let command = try AuthorizedToolExecution.parse(
+      payload(
+        toolName: "web_search",
+        overrides: ["surfaceKind": "main_chat"]),
+      currentOwnerID: "owner-1")
+
+    XCTAssertEqual(command.canonicalToolName, "web_search")
+    XCTAssertEqual(command.executor, .chatToolExecutor)
+    XCTAssertEqual(command.surfaceKind, "main_chat")
+  }
+
+  func testWebSearchKeepsRealtimeHubExecutorOnRealtimeVoice() throws {
+    let command = try AuthorizedToolExecution.parse(
+      payload(
+        toolName: "web_search",
+        overrides: ["surfaceKind": "realtime_voice"]),
+      currentOwnerID: "owner-1")
+
+    XCTAssertEqual(command.canonicalToolName, "web_search")
+    XCTAssertEqual(command.executor, .realtimeHub)
+    XCTAssertEqual(command.surfaceKind, "realtime_voice")
+  }
+
   func testRealtimeHandlerRejectionUsesExactFailedLedgerWireTuple() throws {
     let command = try AuthorizedToolExecution.parse(
       payload(
