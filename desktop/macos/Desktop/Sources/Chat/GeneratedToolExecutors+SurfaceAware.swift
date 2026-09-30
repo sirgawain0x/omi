@@ -10,7 +10,7 @@ extension GeneratedToolExecutors {
     for tool: GeneratedSwiftTool,
     surfaceKind: String
   ) -> GeneratedSwiftToolExecutor? {
-    if tool == .webSearch, surfaceKind == "main_chat" {
+    if tool == .webSearch, ["main_chat", "floating_chat"].contains(surfaceKind) {
       return .chatToolExecutor
     }
     return executorByTool[tool]
