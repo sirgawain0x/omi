@@ -1,0 +1,3 @@
+{
+  "change": "Fixed Web Search in typed chat failing with an internal unknown_realtime_invocation error"
+}

@@ -19,6 +19,8 @@ covers:
   - desktop/macos/Desktop/Sources/Chat/AgentLifecycleDisplayProjection.swift
   - desktop/macos/Desktop/Sources/Chat/AgentLifecycleTranscriptProjection.swift
   - desktop/macos/Desktop/Sources/Chat/AuthorizedToolExecution.swift
+  # Surface-aware executor routing for dual-surface tools (chat web_search).
+  - desktop/macos/Desktop/Sources/Chat/GeneratedToolExecutors+SurfaceAware.swift
   - desktop/macos/Desktop/Sources/Chat/ChatOmiMark.swift
   - desktop/macos/Desktop/Sources/Chat/ChatPrompts.swift
   - desktop/macos/Desktop/Sources/Chat/DesktopCapabilityRegistry.swift
@@ -73,6 +75,8 @@ covers:
   - desktop/macos/Desktop/Sources/DesktopAutomationBridge+ResponseContext.swift
   - desktop/macos/Desktop/Sources/Chat/AgentQueryResult.swift
   - desktop/macos/Desktop/Sources/Providers/ChatToolExecutor+MemoryCreation.swift
+  # Paid public-web lookup for typed-chat web_search (authorized main_chat path).
+  - desktop/macos/Desktop/Sources/Providers/ChatToolExecutor+WebSearch.swift
   - desktop/macos/Desktop/Sources/Providers/ChatProvider+JournalProjection.swift
   - desktop/macos/Desktop/Sources/Providers/ChatProvider+OrphanRepair.swift
   - desktop/macos/Desktop/Sources/Chat/AgentBridge.swift

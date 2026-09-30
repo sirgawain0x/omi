@@ -112,9 +112,7 @@ struct AuthorizedToolExecution: @unchecked Sendable {
       throw Rejection.wrongOwner
     }
     let requestedToolName = try requiredString("toolName")
-    guard let resolvedTool = GeneratedToolExecutors.resolve(requestedToolName),
-      let executor = GeneratedToolExecutors.executorByTool[resolvedTool]
-    else {
+    guard let resolvedTool = GeneratedToolExecutors.resolve(requestedToolName) else {
       throw Rejection.unsupportedExecutor
     }
     let manifestVersion = payload["manifestVersion"] as? Int ?? 0
@@ -122,6 +120,13 @@ struct AuthorizedToolExecution: @unchecked Sendable {
       throw Rejection.staleManifest
     }
     let surfaceKind = try requiredString("surfaceKind")
+    guard
+      let executor = GeneratedToolExecutors.executor(
+        for: resolvedTool,
+        surfaceKind: surfaceKind)
+    else {
+      throw Rejection.unsupportedExecutor
+    }
     let chatFirstControlGeneration = payload["chatFirstControlGeneration"] as? Int
     // Validate chat-first capability before manifest digest selection so an
     // invalid capability surfaces as .invalidChatFirstCapability rather than
