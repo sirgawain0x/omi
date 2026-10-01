@@ -2,8 +2,8 @@ import Foundation
 
 extension ChatToolExecutor {
   /// Typed-chat public-web lookup. Advertised on `desktop_chat`; authorized
-  /// `main_chat` commands route here via surface-aware executor resolution so
-  /// they never hit the voice-only realtime invocation map.
+  /// `main_chat` and `floating_chat` commands route here via surface-aware
+  /// executor resolution so they never hit the voice-only realtime invocation map.
   static func executeWebSearch(
     _ arguments: [String: Any],
     expectedOwnerID: String?,
