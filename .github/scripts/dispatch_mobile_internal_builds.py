@@ -231,7 +231,19 @@ def main(argv: Optional[list[str]] = None) -> int:
     pending_by_workflow: dict[str, list[str]] = {}
     if args.event == "schedule":
         if not token:
-            raise DispatchError("CODEMAGIC_API_TOKEN is required to read the last built commit")
+            # Forks and staging repos often omit Codemagic credentials; a missing token must
+            # not fail the three-hourly schedule (FC-periodic-sweep-ungated-by-configured-credentials).
+            print(
+                " ".join(
+                    [
+                        f"event={args.event}",
+                        f"actor={args.actor}",
+                        "dispatch=false",
+                        "reason=unconfigured: CODEMAGIC_API_TOKEN is not set",
+                    ]
+                )
+            )
+            return 0
         for workflow_id in MOBILE_WORKFLOWS:
             pending_by_workflow[workflow_id] = app_commits_since(
                 last_built_sha(
