@@ -52,6 +52,21 @@ class TestPushEvent(unittest.TestCase):
 
 
 class TestScheduleEvent(unittest.TestCase):
+    def test_skips_when_codemagic_is_not_configured(self):
+        env = {key: value for key, value in mod.os.environ.items() if key != "CODEMAGIC_API_TOKEN"}
+        with patch.dict(mod.os.environ, env, clear=True):
+            exit_code = mod.main(
+                [
+                    "--event",
+                    "schedule",
+                    "--app-id",
+                    "app",
+                    "--source-sha",
+                    "a" * 40,
+                ]
+            )
+        self.assertEqual(exit_code, 0)
+
     def test_builds_when_app_changed_since_the_last_build(self):
         should, reason = decide("schedule", pending=True)
         self.assertTrue(should)
