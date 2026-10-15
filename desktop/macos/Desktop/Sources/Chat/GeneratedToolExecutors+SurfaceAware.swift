@@ -10,9 +10,20 @@ extension GeneratedToolExecutors {
     for tool: GeneratedSwiftTool,
     surfaceKind: String
   ) -> GeneratedSwiftToolExecutor? {
-    if tool == .webSearch, surfaceKind == "main_chat" {
+    if tool == .webSearch, usesTypedChatPublicWebExecutor(surfaceKind: surfaceKind) {
       return .chatToolExecutor
     }
     return executorByTool[tool]
+  }
+
+  /// Desktop typed-chat coordinator surfaces that advertise `web_search` through
+  /// the pi-mono lane (see `isToolAvailableForContext` / `typedChatCoordinatorOnly`).
+  private static func usesTypedChatPublicWebExecutor(surfaceKind: String) -> Bool {
+    switch surfaceKind {
+    case "main_chat", "floating_chat":
+      return true
+    default:
+      return false
+    }
   }
 }

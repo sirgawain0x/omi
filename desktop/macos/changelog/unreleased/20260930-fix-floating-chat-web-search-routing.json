@@ -1,0 +1,3 @@
+{
+  "change": "Fixed web search in floating typed chat by routing it through the correct chat tool executor instead of the realtime invocation path."
+}

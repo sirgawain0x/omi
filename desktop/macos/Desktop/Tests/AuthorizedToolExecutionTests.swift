@@ -151,6 +151,18 @@ final class AuthorizedToolExecutionTests: XCTestCase {
     XCTAssertEqual(command.surfaceKind, "main_chat")
   }
 
+  func testWebSearchRoutesToChatToolExecutorOnFloatingChat() throws {
+    let command = try AuthorizedToolExecution.parse(
+      payload(
+        toolName: "web_search",
+        overrides: ["surfaceKind": "floating_chat"]),
+      currentOwnerID: "owner-1")
+
+    XCTAssertEqual(command.canonicalToolName, "web_search")
+    XCTAssertEqual(command.executor, .chatToolExecutor)
+    XCTAssertEqual(command.surfaceKind, "floating_chat")
+  }
+
   func testWebSearchKeepsRealtimeHubExecutorOnRealtimeVoice() throws {
     let command = try AuthorizedToolExecution.parse(
       payload(
