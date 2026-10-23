@@ -42,7 +42,7 @@
     "firebase-admin": "^13.3.0",
     "ioredis": "^5.10.1",
     "lucide-react": "^0.446.0",
-    "next": "~16.2.11",
+    "next": "~16.4.1",
     "next-themes": "^0.3.0",
     "postcss": "~8.5.18",
     "react": "18.2.0",
@@ -52,7 +52,7 @@
     "stripe": "18.4.0",
     "swr": "^2.3.3",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss": "3.3.3",
+    "tailwindcss": "4.3.3",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
     "use-debounce": "^10.0.4",
@@ -87,6 +87,6 @@
     "websocket-driver": ">=0.5.8",
     "undici": "7.28.0",
     "js-yaml": "~5.2.2",
-    "sharp": "~0.35.0"
+    "sharp": "~0.35.5"
   }
 }
