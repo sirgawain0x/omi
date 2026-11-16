@@ -2,7 +2,7 @@
 # Vulnerable pins bumped to patched for #7327; every package floored at
 # >= its original version so the re-resolve introduces no regressions.
 aiohappyeyeballs==2.6.1
-aiohttp==3.13.5
+aiohttp==3.14.4
 aiosignal==1.4.0
 alembic==1.18.4
 altair==6.1.0
@@ -95,7 +95,7 @@ narwhals==2.21.2
 numpy==2.4.6
 openai==2.37.0
 openai-agents==0.17.3
-opentelemetry-api==1.42.0
+opentelemetry-api==1.45.2
 opentelemetry-proto==1.42.0
 opentelemetry-sdk==1.42.0
 opentelemetry-semantic-conventions==0.63b0
@@ -104,7 +104,7 @@ orjson==3.11.9
 ormsgpack==1.12.2
 packaging==26.2
 pandas==3.0.3
-pillow==12.3.0
+pillow==13.0.0
 propcache==0.5.2
 protobuf==6.33.6
 pyarrow==24.0.0
@@ -146,7 +146,7 @@ threadpoolctl==3.6.0
 tiktoken==0.13.0
 tokenizers==0.23.1
 toml==0.10.2
-tornado==6.5.5
+tornado==6.6.1
 tqdm==4.67.3
 typeguard==4.4.3
 typer==0.25.1

@@ -1,6 +1,6 @@
 # GPU services requirements — extends backend deps with torch/pyannote
 -r ../requirements.txt
-torch==2.10.0
+torch==2.15.0
 torchaudio==2.10.0
 pyannote.audio==3.3.1
 pandas==2.2.2

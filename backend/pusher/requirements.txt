@@ -75,7 +75,7 @@ deepgram-sdk==4.8.1
 cryptography==48.0.1
 
 # Image processing (via tools/__init__ -> file_tools -> chat_file -> PIL)
-pillow==12.3.0
+pillow==13.0.0
 
 # Utilities
 python-dotenv==1.2.2
