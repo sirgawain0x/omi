@@ -8,7 +8,7 @@ uvloop==0.20.0
 starlette==0.49.3
 websockets==12.0
 httpx==0.28.0
-python-multipart==0.0.31
+python-multipart==0.0.32
 
 # Data validation
 pydantic==2.11.10
@@ -72,13 +72,13 @@ neo4j==5.23.1
 deepgram-sdk==4.8.1
 
 # Security & encryption
-cryptography==48.0.1
+cryptography==50.0.0
 
 # Image processing (via tools/__init__ -> file_tools -> chat_file -> PIL)
 pillow==12.3.0
 
 # Utilities
-python-dotenv==1.2.2
+python-dotenv==1.2.3
 tenacity==8.2.3
 python-dateutil==2.9.0.post0
 orjson==3.11.6
