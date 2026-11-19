@@ -114,7 +114,7 @@
     "three-instanced-uniforms-mesh": "^0.52.4",
     "three-stdlib": "^2.36.1",
     "ws": "^8.21.0",
-    "zod": "^4.4.3",
+    "zod": "^4.6.6",
     "@mediapipe/tasks-audio": "0.10.35"
   },
   "devDependencies": {
